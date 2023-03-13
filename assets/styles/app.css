@@ -1,0 +1,9 @@
+body {
+    height: 100vh;
+    background-image: url(background.jpg);
+}
+
+.form-wrapper {
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 10px;
+}
