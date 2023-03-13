@@ -18,10 +18,20 @@ class AppController extends AbstractController
         // ...
     }
 
-    #[Route('/back', methods: ['GET'])]
-    public function test(): Response
+    #[Route('/register', methods: ['GET'])]
+    public function register(): Response
     {
-        return $this->render('default/index.html.twig', [
+        return $this->render('default/register.html.twig', [
+            
+        ]);
+
+        // ...
+    }
+
+    #[Route('/backoffice', methods: ['GET'])]
+    public function backoffice(): Response
+    {
+        return $this->render('default/backoffice.html.twig', [
             
         ]);
 
