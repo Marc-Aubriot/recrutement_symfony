@@ -9,7 +9,7 @@
 
             <h1 class="mx-auto col-6">TRT CONSEIL APP</h1>
 
-            <form class="">
+            <!-- <form class="" method="POST">
 
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -29,7 +29,7 @@
 
                 <div class="row">
                     <div class="ps-5 col-9">
-                        <a href="/register"><i>Vous n'avez pas de compte ?</i></a>
+                        <a href="/register"><i>Vous n'avez pas de compte ? </i></a>
                     </div>
 
                     <div class="mb-3 col-3">
@@ -39,9 +39,21 @@
 
                 <div>
                     <a href="/backoffice">Admin link to backoffice</a>
-                </div>
-            </form>
+                </div> 
+            </form> -->
 
+            {{ form(form) }}
+
+            <div class="row">
+                <div class="ps-5 col-9">
+                    <a href="/register"><i>Vous n'avez pas de compte ? </i></a>
+                </div>
+
+                <div class="mb-3 col-3">
+                    <a href="/backoffice">Admin link to backoffice</a>
+                </div>
+            </div> 
+            
         </div>
 
     </section>
