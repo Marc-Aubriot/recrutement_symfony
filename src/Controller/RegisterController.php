@@ -15,30 +15,64 @@ class RegisterController extends AbstractController
     #[Route('/register', name:"register")]
     public function register(Request $request, EntityManagerInterface $entityManager): Response
     {
+        // set les variables de la page
         $form = $this->createForm(RegisterFormType::class);
+        $error_message = null;
+        $validation_message = null;
 
-
+        // Si le formulaire a été Submit
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            // récupère les data du formulaire
             $data = $form->getData();
+
+            // check l'utilisateur correspondant à cette adresse email
+            $loging_user = $entityManager->getRepository(Utilisateur::class)->findOneBy(['email' => $data['email']]);
+
+            // si l'email existe déjà retourne un message d'erreur dans la page
+            if ($loging_user) {
+                $error_message = "L'addresse email ".$data['email']." existe déjà.";
+                return $this->render('default/register.html.twig', [
+                    'form' => $form,
+                    'errorMessage' => $error_message,
+                    'validationMessage' => $validation_message,
+                ]);
+            }
+
+            // si les passwords fournis ne sont pas identique retourne un message d'erreur dans la page
+            if ( $data['password'] !== $data['confirmPassword']) {
+                $error_message = "Les mots de passe ne correspondent pas. Ils doivent être identique.";
+                return $this->render('default/register.html.twig', [
+                    'form' => $form,
+                    'errorMessage' => $error_message,
+                    'validationMessage' => $validation_message,
+                ]);
+            }
+
+            // les informations fournies sont bonnes donc on créé un nouvel utilisateur
             $user = new Utilisateur();
-            $user->setEmail($data['Email']);
-            $user->setPassword($data['Password']);
+            $user->setEmail($data['email']);
+            $user->setPassword($data['password']);
             $user->setIsValid(false);
-
-            // tell Doctrine you want to (eventually) save the User (no queries yet)
+            
+            // save l'user dans doctrine et execute le sql pour save l'user dans la db
             $entityManager->persist($user);
-
-            // actually executes the queries (i.e. the INSERT query)
             $entityManager->flush();
 
-            //new Response('Saved new user with id '.$user->getId());
-            return $this->redirectToRoute('connection');
+            // enregistrement réussi, display un message de confirmation
+            $validation_message = "Votre compte a été correctement créé. Il devra d'abord être validé par un de nos consultant avant que vous puissiez vous connecter. Essayez de vous connecter plus tard.";
+            return $this->render('default/register.html.twig', [
+                'form' => $form,
+                'errorMessage' => $error_message,
+                'validationMessage' => $validation_message,
+            ]);
 
         }
 
         return $this->render('default/register.html.twig', [
             'form' => $form,
+            'errorMessage' => $error_message,
+            'validationMessage' => $validation_message,
         ]);
     }
 }

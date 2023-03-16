@@ -53,3 +53,10 @@ ul,ol,li,a,i {
     color: red;
     width: fit-content;
 }
+
+.validate-display-box {
+    background-color: rgb(176, 243, 196);
+    border-radius: 50px;
+    color: green;
+    width: fit-content;
+}

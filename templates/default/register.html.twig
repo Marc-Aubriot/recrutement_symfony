@@ -9,6 +9,14 @@
 
             <h1 class="mx-auto col-6">TRT CONSEIL APP</h1>
 
+            <div class="{{ errorMessage=='' ? 'd-none' :'error-display-box' }}">
+                <p class="p-3"><b>{{errorMessage}}</b><p>
+            </div>
+
+            <div class="{{ validationMessage=='' ? 'd-none' :'validate-display-box' }}">
+                <p class="p-3"><b>{{validationMessage}}</b><p>
+            </div>
+
             {{ form(form) }}
 
             <div class="row">

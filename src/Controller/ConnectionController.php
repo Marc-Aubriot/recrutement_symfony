@@ -26,7 +26,6 @@ class ConnectionController extends AbstractController
             $data = $form->getData();
 
             // check l'utilisateur correspondant à cette adresse email
-            //$loging_user = $entityManager->getRepository(Utilisateur::class)->find($data['email']);
             $loging_user = $entityManager->getRepository(Utilisateur::class)->findOneBy(['email' => $data['email']]);
 
             // si l'email n'existe pas retourne un message d'erreur dans la page
@@ -40,7 +39,7 @@ class ConnectionController extends AbstractController
 
             // si le password fourni est différent du password de l'utilisateur retourne un message d'erreur dans la page
             if ($loging_user->getPassword() !== $data['password']) {
-                $error_message = "Le mot de passe ".$data['password']." est incorrect.";
+                $error_message = "Le mot de passe est incorrect.";
                 return $this->render('default/connection.html.twig', [
                     'form' => $form,
                     'errorMessage' => $error_message,
@@ -56,9 +55,11 @@ class ConnectionController extends AbstractController
                 ]);
             }
 
-            // l'addresse email existe, le password correspond et l'utilisateur est validé et donc peut se connecter
-            return $this->render('default/backoffice.html.twig', [
-
+            // l'addresse email existe, le password correspond et l'utilisateur est validé, donc peut se connecter
+            // on redirect sur le backoffice avec l'id comme nouvelle route
+            $id = $loging_user->getId();
+            return $this->redirectToRoute("backoffice", [
+                'id' => $id,
             ]);
         }
 

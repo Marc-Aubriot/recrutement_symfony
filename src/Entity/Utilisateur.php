@@ -30,10 +30,10 @@ class Utilisateur
     private ?string $password = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $user_type = null;
+    private ?int $userType = null;
 
     #[ORM\Column(nullable: true)]
-    private ?bool $is_valid = null;
+    private ?bool $isValid = null;
 
     public function getId(): ?int
     {
@@ -102,24 +102,24 @@ class Utilisateur
 
     public function getUserType(): ?int
     {
-        return $this->user_type;
+        return $this->userType;
     }
 
-    public function setUserType(?int $user_type): self
+    public function setUserType(?int $userType): self
     {
-        $this->user_type = $user_type;
+        $this->userType = $userType;
 
         return $this;
     }
 
     public function getIsValid(): ?bool
     {
-        return $this->is_valid;
+        return $this->isValid;
     }
 
-    public function setIsValid(?bool $is_valid): self
+    public function setIsValid(?bool $isValid): self
     {
-        $this->is_valid = $is_valid;
+        $this->isValid = $isValid;
 
         return $this;
     }

@@ -1,4 +1,4 @@
-{# templates/default/index.html.twig #}
+{# templates/default/backoffice.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block body %}
@@ -10,17 +10,19 @@
 
                 <h1 class="ms-4">TRT CONSEIL APP</h1>
 
-                <h2>User # 1</h2>
+                <h2>Bonjour {{user.nom}} {{user.prénom}} !</h2>
                 <p><i>voir profil</i></p>
 
-                <ul class="ms-5">
+                {{ user.userType==4 ? block("adminpanel", "/default/adminpanel.twig") : '' }}
+                
+                {#<ul class="ms-5">
                     <li>Compléter Profil</li>
                     <li>Nouvelle annonce</li>
                     <li>Nouveau consultant</li>
-                </ul>
+                </ul>#}
 
                 <div>
-                    <a href="/">Admin link authentification</a>
+                    <a href="/connection">Déconnexion</a>
                 </div>
 
             </div>

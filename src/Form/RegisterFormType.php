@@ -17,10 +17,10 @@ class RegisterFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Adresse_Email', EmailType::class)
-            ->add('Mot_de_passe', PasswordType::class)
-            ->add('Confirmation_du_mot_de_passe', PasswordType::class)
-            ->add('Creer_mon_compte', SubmitType::class)
+            ->add('email', EmailType::class, ['label' => 'Adresse Email'])
+            ->add('password', PasswordType::class, ['label' => 'Mot de passe'])
+            ->add('confirmPassword', PasswordType::class, ['label' => 'Confirmation du mot de passe'])
+            ->add('connect', SubmitType::class, ['label' => 'Creer mon compte'])
         ;
     }
 
