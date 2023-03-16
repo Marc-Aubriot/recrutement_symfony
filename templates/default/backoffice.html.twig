@@ -13,13 +13,10 @@
                 <h2>Bonjour {{user.nom}} {{user.prénom}} !</h2>
                 <p><i>voir profil</i></p>
 
+                {{ user.userType==1 ? block("candidatpanel", "/default/candidatpanel.twig") : '' }}
+                {{ user.userType==2 ? block("recruteurpanel", "/default/recruteurpanel.twig") : '' }}
+                {{ user.userType==3 ? block("consultantpanel", "/default/consultantpanel.twig") : '' }}
                 {{ user.userType==4 ? block("adminpanel", "/default/adminpanel.twig") : '' }}
-                
-                {#<ul class="ms-5">
-                    <li>Compléter Profil</li>
-                    <li>Nouvelle annonce</li>
-                    <li>Nouveau consultant</li>
-                </ul>#}
 
                 <div>
                     <a href="/connection">Déconnexion</a>
