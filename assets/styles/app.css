@@ -46,3 +46,10 @@ ul,ol,li,a,i {
     border: 2px solid blue;
     height: 16vh;
 }
+
+.error-display-box {
+    background-color: rgb(224, 194, 194);
+    border-radius: 50px;
+    color: red;
+    width: fit-content;
+}

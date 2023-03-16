@@ -112,7 +112,7 @@ class Utilisateur
         return $this;
     }
 
-    public function isIsValid(): ?bool
+    public function getIsValid(): ?bool
     {
         return $this->is_valid;
     }

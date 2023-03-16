@@ -1,5 +1,5 @@
 <?php
-// src/Controller/AppController.php
+// src/Controller/RegisterController.php
 namespace App\Controller;
 
 use App\Form\RegisterFormType;
@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-class AppController extends AbstractController
+class RegisterController extends AbstractController
 {
-    #[Route('/', name:"index")]
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/register', name:"register")]
+    public function register(Request $request, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(RegisterFormType::class);
 
@@ -33,28 +33,12 @@ class AppController extends AbstractController
             $entityManager->flush();
 
             //new Response('Saved new user with id '.$user->getId());
-            return $this->redirectToRoute('backoffice');
+            return $this->redirectToRoute('connection');
 
         }
 
-        return $this->render('default/index.html.twig', [
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/register', name:"register")]
-    public function register(): Response
-    {
         return $this->render('default/register.html.twig', [
-            
-        ]);
-    }
-
-    #[Route('/backoffice', name:"backoffice")]
-    public function backoffice(): Response
-    {
-        return $this->render('default/backoffice.html.twig', [
-            
+            'form' => $form,
         ]);
     }
 }

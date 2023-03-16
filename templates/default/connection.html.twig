@@ -1,4 +1,4 @@
-{# templates/default/index.html.twig #}
+{# templates/default/connection.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block body %}
@@ -9,11 +9,15 @@
 
             <h1 class="mx-auto col-6">TRT CONSEIL APP</h1>
 
+            <div class="error-display-box">
+                <p class="p-3"><b>{{errorMessage}}</b><p>
+            </div>
+
             {{ form(form) }}
 
             <div class="row">
                 <div class="ps-5 col-9">
-                    <a href="/register"><i>Vous n'avez pas de compte ? </i></a>
+                    <a href="/register"><i>Vous n'avez pas de compte ?</i></a>
                 </div>
 
                 <div class="mb-3 col-3">
