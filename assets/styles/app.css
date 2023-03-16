@@ -60,3 +60,11 @@ ul,ol,li,a,i {
     color: green;
     width: fit-content;
 }
+
+.hiddenDiv {
+    display: none;
+}
+
+.showDiv {
+    display: initial;
+}

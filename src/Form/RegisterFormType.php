@@ -60,6 +60,7 @@ class RegisterFormType extends AbstractType
     {
         $resolver->setDefaults([
             // Configure your form options here
+            'sanitize_html' => true,
         ]);
     }
 }

@@ -10,3 +10,12 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
+
+let newConsultantBtn = document.getElementById('newConsultantBtnID');
+let newConsultantFormDiv = document.getElementById('newConsultantFormDivID');
+let showNewConsultantFormDiv = false;
+newConsultantBtn.addEventListener('click', ()=> {
+    showNewConsultantFormDiv = !showNewConsultantFormDiv;
+    newConsultantFormDiv.classList = showNewConsultantFormDiv ? "showDiv" : "hiddenDiv";
+});
+
