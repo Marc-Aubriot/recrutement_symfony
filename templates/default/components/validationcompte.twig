@@ -1,11 +1,31 @@
-{# templates/default/validationconsultant.twig #}
+{# templates/default/validationcomptelist.twig #}
 {% extends 'utilisateur/consultant.twig' %}
 
 {% block validation %}
     
-    <div class="annonce row">
+    <div class="addUserBox row">
         <div>
-            <p>Compte USER : ID EMAIL PASSWORD</p>
+
+            <div class=" {{ validationMessage == '' ? 'row rounded' : 'd-none' }} ">
+                <ul> 
+                    {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                    <li>Identifiant : <b>{{ item.id|e }}</b></li>
+                    <li>Adresse Email : <b>{{ item.email|e }}</b></li>
+                    <li>Mot de passe : <b>{{ item.password|e }}</b></li>
+                    <li>{{ form_row(form.checkbox)  }}</li>
+                </ul> 
+
+                {{ form_row(form.submit) }}
+                {{ form_end(form) }}
+
+                
+            </div>
+
+            <div class=" {{ validationMessage == '' ? 'd-none' : 'validate-display-box' }} ">
+                <p class="p-3"><b>{{validationMessage}}</b><p>
+            </div>
+
         </div>
         
     </div>

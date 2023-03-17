@@ -16,13 +16,6 @@
                 {% block sectionPanel %}
                 {% endblock %}
 
-                {#
-                {{ user.userType==1 ? block("candidatpanel", "/default/candidatpanel.twig") : '' }}
-                {{ user.userType==2 ? block("recruteurpanel", "/default/recruteurpanel.twig") : '' }}
-                {{ user.userType==3 ? block("consultantpanel", "/default/consultantpanel.twig") : '' }}
-                {{ user.userType==4 ? block("adminpanel", "/default/adminpanel.twig") : '' }}
-                #}
-
                 <div>
                     <a href="/connection">Déconnexion</a>
                 </div>
@@ -36,11 +29,6 @@
 
             {% block sectionMain %}
             {% endblock %}
-            
-            {#
-            {{ user.userType==1 ? block("annonce", "/default/annonce.twig") : '' }}
-            {{ user.userType==3 ? block("validationconsultant", "/default/validationconsultant.twig") : '' }}
-            #}
             
         </div>
 

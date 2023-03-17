@@ -4,9 +4,7 @@
 {% block sectionPanel %}
     <p>CONSULTANT PANEL TEST</p>
     <ul class="ms-5">
-        <li><a href={{ url('validationcompte', {'id': user.id}) }}>Validation de compte</a></li>
-        <li>Nouvelle annonce</li>
-        <li>Nouveau consultant</li>
+        <li><a href={{ url('validationcomptelist', {'id': user.id}) }}>Validation de compte</a></li>
     </ul>
 {% endblock %}
 

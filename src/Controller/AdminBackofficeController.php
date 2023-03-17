@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdminBackofficeController extends AbstractController
 {
-    #[Route('/backoffice/Admin/{id}', name:"backofficeAdmin")]
+    #[Route('/backoffice/admin/{id}', name:"backofficeAdmin")]
     public function backoffice(EntityManagerInterface $entityManager, int $id, Request $request): Response
     {
         // fetch l'objet user via son id dans la db

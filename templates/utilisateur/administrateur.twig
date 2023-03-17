@@ -3,11 +3,8 @@
 
 {% block sectionPanel %}
 
-    <p>ADMIN PANEL TEST</p>
+    <p>ADMIN PANEL</p>
     <ul class="ms-5">
-        <li>Compléter Profil</li>
-        <li>Nouvelle annonce</li>
-        <li>Nouveau consultant</li>
         <button id="newConsultantBtnID">Nouveau Consultant</button>
     </ul>
 
@@ -19,8 +16,12 @@
         <p class="p-3"><b>{{ validationMessage }}</b><p>
     </div>
 
+{% endblock %}
+
+{% block sectionMain %}
+
     <div id="newConsultantFormDivID" class="hiddenDiv">
         {{ form(form) }}
-    </div>
+    </div
 
 {% endblock %}

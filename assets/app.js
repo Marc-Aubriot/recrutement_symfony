@@ -16,6 +16,6 @@ let newConsultantFormDiv = document.getElementById('newConsultantFormDivID');
 let showNewConsultantFormDiv = false;
 newConsultantBtn.addEventListener('click', ()=> {
     showNewConsultantFormDiv = !showNewConsultantFormDiv;
-    newConsultantFormDiv.classList = showNewConsultantFormDiv ? "showDiv" : "hiddenDiv";
+    newConsultantFormDiv.classList = showNewConsultantFormDiv ? "showDiv addConsultantForm" : "hiddenDiv";
 });
 
