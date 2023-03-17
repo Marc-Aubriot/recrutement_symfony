@@ -1,0 +1,18 @@
+{# templates/default/annonce.twig #}
+{% extends 'utilisateur/candidat.twig' %}
+
+{% block sectionMain %}
+    <div class="completeProfilFormBox row">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.adresse) }}
+        {{ form_row(form.email, { 'disabled': true, "attr": {"placeholder": user.email} }) }}
+        {{ form_row(form.password, { 'disabled': true }) }}
+        {{ form_row(form.CV) }}
+        {{ form_row(form.submit) }}
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}

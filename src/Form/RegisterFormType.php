@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -51,6 +52,14 @@ class RegisterFormType extends AbstractType
                         'minMessage' => 'Le mot de passe doit comporter au moins 6 caractères',
                         'maxMessage' => 'Le mot de passe ne doit pas dépasser 255 caractères',
                     ])],
+            ])
+            ->add('checkboxCandidat', CheckboxType::class, [
+                'label' => 'Vous êtes un candidat ?',
+                'required' => false,
+            ])
+            ->add('checkboxRecruteur', CheckboxType::class, [
+                'label' => 'Vous êtes un recruteur ?',
+                'required' => false,
             ])
             ->add('connect', SubmitType::class, ['label' => 'Creer mon compte'])
         ;

@@ -1,0 +1,15 @@
+{# templates/default/candidatpanel.twig #}
+{% extends 'default/backoffice.html.twig' %}
+
+{% block sectionPanel %}
+    <p>CANDIDAT PANEL TEST</p>
+    <ul class="ms-5">
+        <li><a href={{ url('completeprofil', {'id': user.id}) }}>Compléter mon profil</a></li>
+    </ul>
+{% endblock %}
+
+{% block sectionMain %}
+
+    
+    
+{% endblock %}

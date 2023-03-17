@@ -49,12 +49,37 @@ class RegisterController extends AbstractController
                 ]);
             }
 
+            // si les checkbox sont vides retourne un message d'erreur dans la plage
+            if ( $data['checkboxCandidat'] !== true && $data['checkboxRecruteur'] !== true ) {
+                $error_message = "Vous n'avez pas cocher de case candidat ou recruteur.";
+                return $this->render('default/register.html.twig', [
+                    'form' => $form,
+                    'errorMessage' => $error_message,
+                    'validationMessage' => $validation_message,
+                ]);
+            }
+
+            // si les checkbox sont pleines retourne un message d'erreur dans la plage
+            if ( $data['checkboxCandidat'] === true && $data['checkboxRecruteur'] === true ) {
+                $error_message = "Vous ne pouvez cocher qu'une seule case candidat ou recruteur.";
+                return $this->render('default/register.html.twig', [
+                    'form' => $form,
+                    'errorMessage' => $error_message,
+                    'validationMessage' => $validation_message,
+                ]);
+            }
+
+            // défini le type d'utilisateur
+            //if ( $data['checkboxCandidat'] === true ) {
+            $user_type = $data['checkboxCandidat'] ? 1 : 2;
+
             // les informations fournies sont bonnes donc on créé un nouvel utilisateur
             $user = new Utilisateur();
             $user->setEmail($data['email']);
             $user->setPassword($data['password']);
             $user->setIsValid(false);
-            
+            $user->setUserType($user_type);
+   
             // save l'user dans doctrine et execute le sql pour save l'user dans la db
             $entityManager->persist($user);
             $entityManager->flush();
