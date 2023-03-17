@@ -1,7 +1,7 @@
 {# templates/default/adminpanel.twig #}
-{% extends 'base.html.twig' %}
+{% extends 'default/backoffice.html.twig' %}
 
-{% block adminpanel %}
+{% block sectionPanel %}
 
     <p>ADMIN PANEL TEST</p>
     <ul class="ms-5">
@@ -11,12 +11,12 @@
         <button id="newConsultantBtnID">Nouveau Consultant</button>
     </ul>
 
-    <div class="{{ errorMessage=='' ? 'd-none' :'error-display-box' }}">
-        <p class="p-3"><b>{{errorMessage}}</b><p>
+    <div class="{{ errorMessage == '' ? 'd-none' : 'error-display-box' }}">
+        <p class="p-3"><b>{{ errorMessage }}</b><p>
     </div>
 
-    <div class="{{ validationMessage=='' ? 'd-none' :'validate-display-box' }}">
-        <p class="p-3"><b>{{validationMessage}}</b><p>
+    <div class="{{ validationMessage == '' ? 'd-none' : 'validate-display-box' }}">
+        <p class="p-3"><b>{{ validationMessage }}</b><p>
     </div>
 
     <div id="newConsultantFormDivID" class="hiddenDiv">

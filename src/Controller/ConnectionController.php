@@ -56,11 +56,37 @@ class ConnectionController extends AbstractController
             }
 
             // l'addresse email existe, le password correspond et l'utilisateur est validé, donc peut se connecter
-            // on redirect sur le backoffice avec l'id comme nouvelle route
+            // on redirect sur le backoffice avec l'id comme nouvelle route, routing selon le type d'user
             $id = $loging_user->getId();
-            return $this->redirectToRoute("backoffice", [
-                'id' => $id,
-            ]);
+            $user_type = $loging_user->getUserType();
+
+            // user admin
+            if ($user_type === 4) {
+                return $this->redirectToRoute("backofficeAdmin", [
+                    'id' => $id,
+                ]);
+            }
+
+            // user consultant
+            if ($user_type === 3) {
+                return $this->redirectToRoute("backofficeConsultant", [
+                    'id' => $id,
+                ]);
+            }
+
+            // user recruteur
+            /*if ($user_type === 2) {
+                return $this->redirectToRoute("backofficeRecruteur", [
+                    'id' => $id,
+                ]);
+            }
+
+            // user candidat
+            if ($user_type === 1) {
+                return $this->redirectToRoute("backofficeCandidat", [
+                    'id' => $id,
+                ]);
+            }*/
         }
 
         // premier render de la page

@@ -13,10 +13,15 @@
                 <h2>Bonjour {{user.nom}} {{user.prénom}} !</h2>
                 <p><i>voir profil</i></p>
 
+                {% block sectionPanel %}
+                {% endblock %}
+
+                {#
                 {{ user.userType==1 ? block("candidatpanel", "/default/candidatpanel.twig") : '' }}
                 {{ user.userType==2 ? block("recruteurpanel", "/default/recruteurpanel.twig") : '' }}
                 {{ user.userType==3 ? block("consultantpanel", "/default/consultantpanel.twig") : '' }}
                 {{ user.userType==4 ? block("adminpanel", "/default/adminpanel.twig") : '' }}
+                #}
 
                 <div>
                     <a href="/connection">Déconnexion</a>
@@ -29,7 +34,13 @@
 
         <div class="backOfficeMainView col-8 m-5 row">
 
-            {{ block("annonce", "/default/annonce.twig") }}
+            {% block sectionMain %}
+            {% endblock %}
+            
+            {#
+            {{ user.userType==1 ? block("annonce", "/default/annonce.twig") : '' }}
+            {{ user.userType==3 ? block("validationconsultant", "/default/validationconsultant.twig") : '' }}
+            #}
             
         </div>
 

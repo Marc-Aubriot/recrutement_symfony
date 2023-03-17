@@ -1,5 +1,5 @@
 <?php
-// src/Controller/BackofficeController.php
+// src/Controller/AdminBackofficeController.php
 namespace App\Controller;
 
 use App\Controller\ConnectionController;
@@ -12,9 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-class BackofficeController extends AbstractController
+class AdminBackofficeController extends AbstractController
 {
-    #[Route('/backoffice/{id}', name:"backoffice")]
+    #[Route('/backoffice/Admin/{id}', name:"backofficeAdmin")]
     public function backoffice(EntityManagerInterface $entityManager, int $id, Request $request): Response
     {
         // fetch l'objet user via son id dans la db
@@ -49,7 +49,7 @@ class BackofficeController extends AbstractController
                 // si les passwords fournis ne sont pas identique retourne un message d'erreur dans la page
                 if ( $data['password'] !== $data['confirmPassword']) {
                     $error_message = "Les mots de passe ne correspondent pas. Ils doivent être identique.";
-                    return $this->render('default/backoffice.html.twig', [
+                    return $this->render('utilisateur/administrateur.twig', [
                         'user' => $user,
                         'form' => $form,
                         'errorMessage' => $error_message,
@@ -70,7 +70,7 @@ class BackofficeController extends AbstractController
 
                 // enregistrement réussi, display un message de confirmation
                 $validation_message = "Le compte du consultant a été correctement créé, il est actif immédiatement.";
-                return $this->render('default/backoffice.html.twig', [
+                return $this->render('utilisateur/administrateur.twig', [
                     'user' => $user,
                     'form' => $form,
                     'errorMessage' => $error_message,
@@ -79,7 +79,7 @@ class BackofficeController extends AbstractController
             }
         }
 
-        return $this->render('default/backoffice.html.twig', [
+        return $this->render('utilisateur/administrateur.twig', [
             'user' => $user,
             'errorMessage' => $error_message,
             'validationMessage' => $validation_message,

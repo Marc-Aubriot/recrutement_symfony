@@ -1,0 +1,17 @@
+{# templates/default/consultant.twig #}
+{% extends 'default/backoffice.html.twig' %}
+
+{% block sectionPanel %}
+    <p>CONSULTANT PANEL TEST</p>
+    <ul class="ms-5">
+        <li><a href={{ url('validationcompte', {'id': user.id}) }}>Validation de compte</a></li>
+        <li>Nouvelle annonce</li>
+        <li>Nouveau consultant</li>
+    </ul>
+{% endblock %}
+
+{% block sectionMain %}
+
+    {% block validation %}{% endblock %}
+    
+{% endblock %}
