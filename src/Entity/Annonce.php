@@ -15,7 +15,7 @@ class Annonce
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $recruteur_id = null;
+    private ?int $recruteurId = null;
 
     #[ORM\Column(length: 255)]
     private ?string $intitulé = null;
@@ -48,12 +48,12 @@ class Annonce
 
     public function getRecruteurId(): ?int
     {
-        return $this->recruteur_id;
+        return $this->recruteurId;
     }
 
-    public function setRecruteurId(int $recruteur_id): self
+    public function setRecruteurId(int $recruteurId): self
     {
-        $this->recruteur_id = $recruteur_id;
+        $this->recruteurId = $recruteurId;
 
         return $this;
     }

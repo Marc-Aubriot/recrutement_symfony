@@ -1,0 +1,38 @@
+{# templates/default/validationannonce.twig #}
+{% extends 'utilisateur/consultant.twig' %}
+
+{% block validation %}
+    
+    <div class="addUserBox row">
+        <div>
+
+            <div class=" {{ validationMessage == '' ? 'row rounded' : 'd-none' }} ">
+                <ul> 
+                    {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                    <li>Identifiant de l'annonce: <b>{{ item.id|e }}</b></li>
+                    <li>Identifiant du recruteur responsable de l'annonce: <b>{{ item.recruteurId|e }}</b></li>
+                    <li>Intitulé du poste : <b>{{ item.intitulé|e }}</b></li>
+                    <li>Nom de l'entreprise : <b>{{ item.nomEntreprise|e }}</b></li>
+                    <li>Adresse de l'entreprise : <b>{{ item.adresseEntreprise|e }}</b></li>
+                    <li>Description du Poste : <b>{{ item.description|e }}</b></li>
+                    <li>Horaires : <b>{{ item.horaires|e }}</b></li>
+                    <li>Salaire : <b>{{ item.salaire|e }}</b></li>
+                    <li>{{ form_row(form.checkbox)  }}</li>
+                </ul> 
+
+                {{ form_row(form.submit) }}
+                {{ form_end(form) }}
+
+                
+            </div>
+
+            <div class=" {{ validationMessage == '' ? 'd-none' : 'validate-display-box' }} ">
+                <p class="p-3"><b>{{validationMessage}}</b><p>
+            </div>
+
+        </div>
+        
+    </div>
+
+{% endblock %}
