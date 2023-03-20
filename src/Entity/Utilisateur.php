@@ -35,6 +35,9 @@ class Utilisateur
     #[ORM\Column(nullable: true)]
     private ?bool $isValid = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $cv = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +123,18 @@ class Utilisateur
     public function setIsValid(?bool $isValid): self
     {
         $this->isValid = $isValid;
+
+        return $this;
+    }
+
+    public function getCv(): ?string
+    {
+        return $this->cv;
+    }
+
+    public function setCv(?string $cv): self
+    {
+        $this->cv = $cv;
 
         return $this;
     }

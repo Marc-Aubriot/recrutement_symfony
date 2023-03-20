@@ -24,25 +24,16 @@ class CompleteProfilFormType extends AbstractType
                 'label' => 'Nom',
                 'attr' => ['maxlength' => 50],
                 'required' => false,
-                'constraints' => [
-                    new NotBlank(),
-                ],
             ])
             ->add('prenom', TextType::class, [
                 'label' => 'Prénom',
                 'attr' => ['maxlength' => 50],
                 'required' => false,
-                'constraints' => [
-                    new NotBlank(),
-                ],
             ])
             ->add('adresse', TextType::class, [
                 'label' => 'Adresse',
                 'attr' => ['maxlength' => 255],
                 'required' => false,
-                'constraints' => [
-                    new NotBlank(),
-                ],
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Adresse Email',
@@ -64,7 +55,7 @@ class CompleteProfilFormType extends AbstractType
                         'maxMessage' => 'Le mot de passe ne doit pas dépasser 255 caractères',
                     ])],
             ])
-            ->add('CV', FileType::class, [
+            ->add('cv', FileType::class, [
                 'label' => 'CV (PDF file)',
 
                 // unmapped means that this field is not associated to any entity property
