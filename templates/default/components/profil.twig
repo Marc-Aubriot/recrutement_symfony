@@ -10,7 +10,7 @@
         {{ form_row(form.adresse, { "attr": {"placeholder": user.adresse} }) }}
         {{ form_row(form.email, { 'disabled': true, "attr": {"placeholder": user.email} }) }}
         {{ form_row(form.password, { 'disabled': true, "attr": {"placeholder": "******"} }) }}
-        {{ form_row(form.cv, { 'disabled': true, "attr": {"placeholder": user.cv} }) }}
+        {{ form_row(form.cv, { "attr": {"placeholder": user.cv} }) }}
         {{ form_row(form.submit) }}
         {{ form_end(form) }}
 

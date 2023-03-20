@@ -98,6 +98,19 @@ class CompleteProfilController extends AbstractController
 
         }
 
+        // si tous les champs sont remplis, renvois un message profile complet
+        $fieldNom = $user->getNom();
+        $fieldPrenom = $user->getPrénom();
+        $fieldAdresse = $user->getAdresse();
+        $fieldCv = $user->getCv();
+
+        if ($fieldNom && $fieldPrenom && $fieldAdresse && $fieldCv) {
+            $validation_message = "Votre profile est compléter à 100%.";
+        }
+        if (!$fieldCv) {
+            $error_message = "Vous devez envoyer un CV pour que votre profile soit à jour.";
+        }
+
         return $this->render('default/components/profil.twig', [
             'user' => $user,
             'form' => $form,
