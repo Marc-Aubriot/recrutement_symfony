@@ -75,11 +75,11 @@ class ConnectionController extends AbstractController
             }
 
             // user recruteur
-            /*if ($user_type === 2) {
+            if ($user_type === 2) {
                 return $this->redirectToRoute("backofficeRecruteur", [
                     'id' => $id,
                 ]);
-            }*/
+            }
 
             // user candidat
             if ($user_type === 1) {

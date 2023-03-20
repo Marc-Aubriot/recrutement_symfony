@@ -2,10 +2,7 @@
 // src/Controller/CompleteProfilController.php
 namespace App\Controller;
 
-use App\Controller\ConnectionController;
-use App\Form\RegisterFormType;
-use App\Form\AddConsultantFormType;
-use App\Form\CompleteProfilFormType;
+use App\Form\CompleteProfilCandidatFormType;
 use App\Entity\Utilisateur;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,17 +10,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Service\CvUploader;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
-class CompleteProfilController extends AbstractController
+class CompleteProfilCandidatController extends AbstractController
 {
-    #[Route('/backoffice/candidat{id}/profil', name:"completeprofil")]
-    public function backoffice(EntityManagerInterface $entityManager, int $id, Request $request, SluggerInterface $slugger, CvUploader $fileUploader): Response
+    #[Route('/backoffice/candidat{id}/profil', name:"completeprofilcandidat")]
+    public function backofficeCandidat(EntityManagerInterface $entityManager, int $id, Request $request, CvUploader $fileUploader): Response
     {
         // set les variables de la page
-        $form = $this->createForm(CompleteProfilFormType::class);
+        $form = $this->createForm(CompleteProfilCandidatFormType::class);
         $error_message = null;
         $validation_message = null;
 
@@ -49,33 +43,6 @@ class CompleteProfilController extends AbstractController
                 $user->setAdresse($data['adresse']);
             }
 
-            /*
-            $file = $form->get('cv')->getData();
-            if ($file) {
-                // défini les variables du document
-                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
-
-                // Move the file to the directory where brochures are stored
-                try {
-                    $file->move(
-                        $this->getParameter('cv_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-
-                // updates the 'cv' property to store the PDF file name
-                // instead of its contents
-                $user->setCv($newFilename);
-            }
-            */
-
-
             // avec service : CvUploader
             $file = $form->get('cv')->getData();
             if ($file) {
@@ -89,7 +56,7 @@ class CompleteProfilController extends AbstractController
 
             // modification des informations réussies, display un message de confirmation
             $validation_message = "Les changements ont étés enregistrés.";
-            return $this->render('default/components/profil.twig', [
+            return $this->render('default/components/profilcandidat.twig', [
                 'user' => $user,
                 'form' => $form,
                 'errorMessage' => $error_message,
@@ -111,11 +78,12 @@ class CompleteProfilController extends AbstractController
             $error_message = "Vous devez envoyer un CV pour que votre profile soit à jour.";
         }
 
-        return $this->render('default/components/profil.twig', [
+        return $this->render('default/components/profilcandidat.twig', [
             'user' => $user,
             'form' => $form,
             'errorMessage' => $error_message,
             'validationMessage' => $validation_message,
         ]);
     }
+
 }

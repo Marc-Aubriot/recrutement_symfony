@@ -1,0 +1,15 @@
+{# templates/default/recruteur.twig #}
+{% extends 'default/backoffice.html.twig' %}
+
+{% block sectionPanel %}
+    <p>RECRUTEUR PANEL TEST</p>
+    <ul class="ms-5">
+        <li><a href={{ url('completeprofilrecruteur', {'id': user.id}) }}>Compléter mon profil</a></li>
+    </ul>
+{% endblock %}
+
+{% block sectionMain %}
+
+    
+    
+{% endblock %}

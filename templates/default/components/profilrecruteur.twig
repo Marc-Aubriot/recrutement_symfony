@@ -1,17 +1,18 @@
-{# templates/default/annonce.twig #}
+{# templates/default/profilrecruteur.twig #}
 {% extends 'utilisateur/candidat.twig' %}
 
 {% block sectionMain %}
     <div class="completeProfilFormBox row">
         {{ form_start(form) }}
         {{ form_errors(form) }}
-        {{ form_row(form.nom, { "attr": {"placeholder": user.nom} }) }}
-        {{ form_row(form.prenom, { "attr": {"placeholder": user.prénom} }) }}
-        {{ form_row(form.adresse, { "attr": {"placeholder": user.adresse} }) }}
+
+        {{ form_row(form.nomentreprise, { "attr": {"placeholder": user.nom} }) }}
+        {{ form_row(form.adresseentreprise, { "attr": {"placeholder": user.adresse} }) }}
         {{ form_row(form.email, { 'disabled': true, "attr": {"placeholder": user.email} }) }}
         {{ form_row(form.password, { 'disabled': true, "attr": {"placeholder": "******"} }) }}
-        {{ form_row(form.cv, { "attr": {"placeholder": user.cv} }) }}
+
         {{ form_row(form.submit) }}
+
         {{ form_end(form) }}
 
          <div class="{{ errorMessage=='' ? 'd-none' :'error-display-box' }}">
