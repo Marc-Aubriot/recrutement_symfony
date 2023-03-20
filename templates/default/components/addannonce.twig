@@ -1,0 +1,27 @@
+{# templates/default/addannonce.twig #}
+{% extends 'utilisateur/recruteur.twig' %}
+
+{% block sectionMain %}
+    <div class="completeProfilFormBox row">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {{ form_row(form.title) }}
+        {{ form_row(form.horaires) }}
+        {{ form_row(form.salaire) }}
+        {{ form_row(form.description) }}
+
+        {{ form_row(form.submit) }}
+
+        {{ form_end(form) }}
+
+         <div class="{{ errorMessage=='' ? 'd-none' :'error-display-box' }}">
+            <p class="p-3"><b>{{errorMessage}}</b><p>
+        </div>
+
+        <div class="{{ validationMessage=='' ? 'd-none' :'validate-display-box' }}">
+            <p class="p-3"><b>{{validationMessage}}</b><p>
+        </div>
+
+    </div>
+{% endblock %}
