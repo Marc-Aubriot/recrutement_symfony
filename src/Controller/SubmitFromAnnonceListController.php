@@ -41,6 +41,14 @@ class SubmitFromAnnonceListController extends AbstractController
         $time->format('H:i:s \O\n Y-m-d');
         $candidature->setDateCandidature($time);
         $candidature->setValidationCandidature(0);
+        $candidature->setUserNom($user->getNom());
+        $candidature->setUserPrenom($user->getPrénom());
+        $candidature->setUserMail($user->getEmail());
+        $candidature->setUserIsValid($user->getIsValid());
+        $candidature->setAnnonceTitle($item->getIntitulé());
+        $candidature->setAnnonceNomEntreprise($item->getNomEntreprise());
+        $candidature->setAnnonceDate($item->getDateCréation());
+        $candidature->setAnnonceIsValid($item->isValidationStatut());
 
         // save l'user à valider dans doctrine et execute le sql pour save l'user dans la db
         $entityManager->persist($candidature);

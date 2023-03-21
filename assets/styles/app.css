@@ -92,3 +92,11 @@ ul,ol,li,a,i {
     padding: 30px;
     height: fit-content;
 }
+
+.candidatureListBox {
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 10px;
+    border: 2px solid blue;
+    padding: 30px;
+    height: fit-content;
+}
