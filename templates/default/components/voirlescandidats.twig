@@ -1,0 +1,23 @@
+{# templates/default/voirlescandidats.twig #}
+{% extends 'utilisateur/recruteur.twig' %}
+
+{% block sectionMain %}
+    
+    <div class="candidatureListBox row">
+        <div>
+            <h3>Liste des candidats pour mon annonce.</h3>
+
+            {% for item in candidats|filter(item => item.isValidationCandidature() == true) %}
+                <div class="row m-1 bg-info rounded">
+                    <div class="col-9">
+                        <p><b>{{ item.userNom|e }} {{ item.userPrenom|e }} {{ item.userMail|e }}</b></p>
+                    </div>
+                    
+                </div>
+            {% endfor %}
+
+        </div>
+        
+    </div>
+
+{% endblock %}

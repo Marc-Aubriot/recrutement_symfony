@@ -1,0 +1,28 @@
+{# templates/default/validationcandidaturelist.twig #}
+{% extends 'utilisateur/candidat.twig' %}
+
+{% block sectionMain %}
+    
+    <div class="candidatureListBox row">
+        <div>
+            <h3>Liste de mes candidatures.</h3>
+
+            {% for item in candidatures %}
+                <div class="row m-1 bg-info rounded">
+                    <div class="col-9">
+                        <p><b>{{ item.annonceTitle|e }} {{ item.annonceNomEntreprise|e }}</b></p>
+                    </div>
+
+                    {#
+                    <div class="col-3">
+                        <a href={{ url('validationcandidature', {'itemid': item.id, 'id':user.id}) }}>Valider la candidature</a>
+                    </div>
+                    #}
+                </div>
+            {% endfor %}
+
+        </div>
+        
+    </div>
+
+{% endblock %}
