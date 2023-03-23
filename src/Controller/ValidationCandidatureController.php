@@ -13,6 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Part\DataPart;
+use Symfony\Component\Mime\Part\File;
 
 class ValidationCandidatureController extends AbstractController
 {
@@ -27,9 +29,13 @@ class ValidationCandidatureController extends AbstractController
         $user = $entityManager->getRepository(Utilisateur::class)->find($id);
         $item = $entityManager->getRepository(Candidature::class)->find($itemid);
 
-        // fetch le mail du recruteur
+        // fetch l'entity du recruteur
         $annonce = $entityManager->getRepository(Annonce::class)->find($item->getAnnonceId());
         $recruteur = $entityManager->getRepository(Utilisateur::class)->find($annonce->getRecruteurId());
+
+        // fetch l'entity du candidat'
+        $candidat = $entityManager->getRepository(Utilisateur::class)->find($item->getUserId());
+
 
         // initialise le formulaire et y attache l'entité item
         $form = $this->createForm(ValidateCandidatureFormType::class);
@@ -58,7 +64,8 @@ class ValidationCandidatureController extends AbstractController
                 //->replyTo('fabien@example.com')
                 //->priority(Email::PRIORITY_HIGH)
                 ->subject('Nouveau candidat pour votre annonce')
-                ->text($message);
+                ->text($message)
+                ->addPart(new DataPart(new File('uploads/cv/'.$candidat->getCv())));
                 //->html('<p>See Twig integration for better HTML integration!</p>');
 
                 $mailer->send($email);
