@@ -2,9 +2,6 @@
 // src/Controller/ValidationCompteController.php
 namespace App\Controller;
 
-use App\Controller\ConnectionController;
-use App\Form\RegisterFormType;
-use App\Form\AddConsultantFormType;
 use App\Form\ValidateCompteFormType;
 use App\Entity\Utilisateur;
 use Doctrine\ORM\EntityManagerInterface;

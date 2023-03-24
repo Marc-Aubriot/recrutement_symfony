@@ -8,6 +8,7 @@
         <button id="newConsultantBtnID">Nouveau Consultant</button>
     </ul>
 
+    {#
     <div class="{{ errorMessage == '' ? 'd-none' : 'error-display-box' }}">
         <p class="p-3"><b>{{ errorMessage }}</b><p>
     </div>
@@ -15,13 +16,16 @@
     <div class="{{ validationMessage == '' ? 'd-none' : 'validate-display-box' }}">
         <p class="p-3"><b>{{ validationMessage }}</b><p>
     </div>
+    #}
 
 {% endblock %}
 
 {% block sectionMain %}
 
+    {#
     <div id="newConsultantFormDivID" class="hiddenDiv">
         {{ form(form) }}
     </div
+    #}
 
 {% endblock %}

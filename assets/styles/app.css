@@ -100,3 +100,7 @@ ul,ol,li,a,i {
     padding: 30px;
     height: fit-content;
 }
+
+.input-field {
+    height: 35px;
+}

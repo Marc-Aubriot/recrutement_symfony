@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
-use App\Entity\Annonce;
 use App\Entity\Candidature;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

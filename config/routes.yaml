@@ -1,5 +1,13 @@
 controllers:
+
     resource:
         path: ../src/Controller/
         namespace: App\Controller
+
+        logout:
+            path: /logout
+            methods: GET
+
     type: attribute
+
+    

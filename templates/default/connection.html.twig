@@ -13,14 +13,10 @@
                 <p class="p-3"><b>{{errorMessage}}</b><p>
             </div>
 
-            {{ form(form) }}
+            {#form(form) #}
 
-            <div class="row">
-                <div class="ps-5 col-9">
-                    <a href="/register"><i>Vous n'avez pas de compte ?</i></a>
-                </div>
-
-            </div> 
+            {% block login %}
+            {% endblock %}
             
         </div>
 
