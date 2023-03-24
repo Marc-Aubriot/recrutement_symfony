@@ -5,14 +5,28 @@ namespace App\Entity;
 use App\Repository\AnnonceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Types\UuidType;
+use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: AnnonceRepository::class)]
 class Annonce
 {
+    /*
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+    */
+    #[ORM\Id]
+    #[ORM\Column(type: UuidType::NAME, unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+    private $id;
+
+    public function getId(): ?Uuid
+    {
+        return $this->id;
+    }
 
     #[ORM\Column]
     private ?int $recruteurId = null;
@@ -41,11 +55,13 @@ class Annonce
     #[ORM\Column]
     private ?bool $validation_statut = null;
 
+    /*
     public function getId(): ?int
     {
         return $this->id;
     }
-
+    */
+    
     public function getRecruteurId(): ?int
     {
         return $this->recruteurId;

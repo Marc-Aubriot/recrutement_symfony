@@ -3,16 +3,30 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Types\UuidType;
+use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 class Utilisateur
 {
+    /*
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+    */
+
+    #[ORM\Id]
+    #[ORM\Column(type: UuidType::NAME, unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+    private $id;
+
+    public function getId(): ?Uuid
+    {
+        return $this->id;
+    }
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $nom = null;
@@ -38,10 +52,12 @@ class Utilisateur
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $cv = null;
 
+    /*
     public function getId(): ?int
     {
         return $this->id;
     }
+    */
 
     public function getNom(): ?string
     {
