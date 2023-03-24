@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ValidationAnnonceController extends AbstractController
 {
     #[Route('backoffice/consultant/validation/annonce/{itemid}', name:"annonce")]
-    public function backoffice(EntityManagerInterface $entityManager, int $itemid, Request $request): Response
+    public function backoffice(EntityManagerInterface $entityManager, $itemid, Request $request): Response
     {
         // securise le controlleur
         $this->denyAccessUnlessGranted('ROLE_CONSULTANT', null, "erreur 403 custom : zone restreinte aux consultants.");

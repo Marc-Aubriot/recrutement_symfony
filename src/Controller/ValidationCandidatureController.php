@@ -18,8 +18,8 @@ use Symfony\Component\Mime\Part\File;
 
 class ValidationCandidatureController extends AbstractController
 {
-    #[Route('backoffice/consultant/validation/candidature/list/{itemid}', name:"validationcandidature")]
-    public function backoffice(EntityManagerInterface $entityManager, int $itemid, Request $request, MailerInterface $mailer): Response
+    #[Route('backoffice/consultant/validation/candidature/{itemid}', name:"validationcandidature")]
+    public function backoffice(EntityManagerInterface $entityManager, $itemid, Request $request, MailerInterface $mailer): Response
     {
         // securise le controlleur
         $this->denyAccessUnlessGranted('ROLE_CONSULTANT', null, "erreur 403 custom : zone restreinte aux consultants.");
@@ -38,10 +38,10 @@ class ValidationCandidatureController extends AbstractController
 
         // fetch l'entity du recruteur
         $annonce = $entityManager->getRepository(Annonce::class)->find($item->getAnnonceId());
-        $recruteur = $entityManager->getRepository(Utilisateur::class)->find($annonce->getRecruteurId());
+        $recruteur = $entityManager->getRepository(Utilisateur::class)->findOneBy(['email' => $annonce->getRecruteurEmail()]);
 
         // fetch l'entity du candidat'
-        $candidat = $entityManager->getRepository(Utilisateur::class)->find($item->getUserId());
+        $candidat = $entityManager->getRepository(Utilisateur::class)->findOneBy(['email' =>$item->getUserMail()]);
 
 
         // initialise le formulaire et y attache l'entité item

@@ -35,7 +35,7 @@ class AddAnnonceController extends AbstractController
             // récupère les data du formulaire
             $data = $form->getData();
             $annonce = new Annonce();
-            $annonce->setRecruteurId($user->getId());
+            $annonce->setRecruteurEmail($user->getEmail());
             $annonce->setIntitulé($data['title']);
             $annonce->setNomEntreprise($user->getNom());
             $annonce->setAdresseEntreprise($user->getAdresse());

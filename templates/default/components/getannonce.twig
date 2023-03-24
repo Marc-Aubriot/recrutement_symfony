@@ -1,17 +1,16 @@
 {# templates/default/getannonce.twig #}
 {% extends 'utilisateur/candidat.twig' %}
 
-{% block validation %}
+{% block sectionMain %}
     
     <div class="addUserBox row">
         <div>
 
             <div class=" {{ validationMessage == '' ? 'row rounded' : 'd-none' }} ">
-                <ul> 
+                <ul class="mb-3"> 
                     {{ form_start(form) }}
                     {{ form_errors(form) }}
                     <li>Identifiant de l'annonce: <b>{{ item.id|e }}</b></li>
-                    <li>Identifiant du recruteur responsable de l'annonce: <b>{{ item.recruteurId|e }}</b></li>
                     <li>Intitulé du poste : <b>{{ item.intitulé|e }}</b></li>
                     <li>Nom de l'entreprise : <b>{{ item.nomEntreprise|e }}</b></li>
                     <li>Adresse de l'entreprise : <b>{{ item.adresseEntreprise|e }}</b></li>

@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class VoirLesCandidatsController extends AbstractController
 {
     #[Route('backoffice/recruteur/mesannonces/annonce{itemid}/candidats', name:"voirlescandidats")]
-    public function backoffice(EntityManagerInterface $entityManager, int $itemid): Response
+    public function backoffice(EntityManagerInterface $entityManager, $itemid): Response
     {
         // securise le controlleur
         $this->denyAccessUnlessGranted('ROLE_RECRUTEUR', null, "erreur 403 custom : zone restreinte aux recruteurs.");

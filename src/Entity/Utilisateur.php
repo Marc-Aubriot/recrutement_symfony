@@ -10,13 +10,6 @@ use Symfony\Component\Uid\Uuid;
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 class Utilisateur
 {
-    /*
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-    */
-
     #[ORM\Id]
     #[ORM\Column(type: UuidType::NAME, unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
@@ -40,24 +33,11 @@ class Utilisateur
     #[ORM\Column(length: 100)]
     private ?string $email = null;
 
-    /*#[ORM\Column(length: 255)]
-    private ?string $password = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $userType = null;*/
-
     #[ORM\Column(nullable: true)]
     private ?bool $isValid = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $cv = null;
-
-    /*
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-    */
 
     public function getNom(): ?string
     {
@@ -106,30 +86,6 @@ class Utilisateur
 
         return $this;
     }
-
-    /*public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }*/
-
-    /*public function getUserType(): ?int
-    {
-        return $this->userType;
-    }
-
-    public function setUserType(?int $userType): self
-    {
-        $this->userType = $userType;
-
-        return $this;
-    }*/
 
     public function getIsValid(): ?bool
     {

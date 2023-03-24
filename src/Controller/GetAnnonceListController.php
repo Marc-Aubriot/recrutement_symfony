@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Entity\Annonce;
+use App\Entity\Candidature;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GetAnnonceListController extends AbstractController
 {
-    #[Route('backoffice/candidat/annonce/list', name:"getannoncelist")]
+    #[Route('backoffice/candidat/annonce', name:"getannoncelist")]
     public function backoffice(EntityManagerInterface $entityManager): Response
     {
         // securise le controlleur
@@ -21,7 +22,11 @@ class GetAnnonceListController extends AbstractController
         $userSecurity = $this->getUser();
         $userMail = $userSecurity->getUserIdentifier();
         $user = $entityManager->getRepository(Utilisateur::class)->findOneBy(['email' => $userMail]);
-
+        $rep = $entityManager->getRepository(Candidature::class);
+        $candidatures = $rep->findBy(
+            ['userMail' => $userMail ],
+            ['dateCandidature' => 'ASC']
+        );
         // initialise les variables
         $validation_message = null;
 
@@ -39,6 +44,7 @@ class GetAnnonceListController extends AbstractController
             'validationMessage' => $validation_message,
             'user' => $user,
             'annonces' => $annonces,
+            'candidatures' => $candidatures,
         ]);
     }
 }

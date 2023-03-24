@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SubmitFromAnnonceListController extends AbstractController
 {
     #[Route('backoffice/candidat/validation/compte/list/submitcandidatureforannonce/{itemid}', name:"submitcandidature")]
-    public function backoffice(EntityManagerInterface $entityManager, int $itemid): Response
+    public function backoffice(EntityManagerInterface $entityManager, $itemid): Response
     {
         // securise le controlleur
         $this->denyAccessUnlessGranted('ROLE_CANDIDAT', null, "erreur 403 custom : zone restreinte aux candidats.");
@@ -22,7 +22,12 @@ class SubmitFromAnnonceListController extends AbstractController
         $userSecurity = $this->getUser();
         $userMail = $userSecurity->getUserIdentifier();
         $user = $entityManager->getRepository(Utilisateur::class)->findOneBy(['email' => $userMail]);
-
+        $rep = $entityManager->getRepository(Candidature::class);
+        $candidatures = $rep->findBy(
+            ['userMail' => $userMail ],
+            ['dateCandidature' => 'ASC']
+        );
+        
         // initialise les variables
         $validation_message = null;
 
@@ -42,7 +47,6 @@ class SubmitFromAnnonceListController extends AbstractController
         // créer une nouvelle candidature
         $candidature = new Candidature();
         $candidature->setAnnonceId($item->getId());
-        $candidature->setUserId($user->getId());
         $time = new \DateTime();
         $time->format('H:i:s \O\n Y-m-d');
         $candidature->setDateCandidature($time);
@@ -50,11 +54,9 @@ class SubmitFromAnnonceListController extends AbstractController
         $candidature->setUserNom($user->getNom());
         $candidature->setUserPrenom($user->getPrénom());
         $candidature->setUserMail($user->getEmail());
-        $candidature->setUserIsValid($user->getIsValid());
         $candidature->setAnnonceTitle($item->getIntitulé());
         $candidature->setAnnonceNomEntreprise($item->getNomEntreprise());
         $candidature->setAnnonceDate($item->getDateCréation());
-        $candidature->setAnnonceIsValid($item->isValidationStatut());
 
         // save l'user à valider dans doctrine et execute le sql pour save l'user dans la db
         $entityManager->persist($candidature);
@@ -67,6 +69,7 @@ class SubmitFromAnnonceListController extends AbstractController
             'user' => $user,
             'item' => $item,
             'annonces' => $annonces,
+            'candidatures' => $candidatures,
         ]);
     }
 }

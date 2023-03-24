@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ValidationCompteController extends AbstractController
 {
-    #[Route('backoffice/consultant/validation/compte/list/{itemid}', name:"compte")]
+    #[Route('backoffice/consultant/validation/compte/{itemid}', name:"compte")]
     public function backoffice(EntityManagerInterface $entityManager, $itemid, Request $request): Response
     {
         // initialise les variables

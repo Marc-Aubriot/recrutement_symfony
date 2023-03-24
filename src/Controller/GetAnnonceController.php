@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 class GetAnnonceController extends AbstractController
 {
     #[Route('backoffice/candidat/validation/compte/list/{itemid}', name:"getannonce")]
-    public function backoffice(EntityManagerInterface $entityManager, int $itemid, Request $request): Response
+    public function backoffice(EntityManagerInterface $entityManager, $itemid, Request $request): Response
     {
         // securise le controlleur
         $this->denyAccessUnlessGranted('ROLE_CANDIDAT', null, "erreur 403 custom : zone restreinte aux candidats.");
@@ -41,7 +41,6 @@ class GetAnnonceController extends AbstractController
             // créer une nouvelle candidature
             $candidature = new Candidature();
             $candidature->setAnnonceId($item->getId());
-            $candidature->setUserId($user->getId());
             $time = new \DateTime();
             $time->format('H:i:s \O\n Y-m-d');
             $candidature->setDateCandidature($time);
@@ -49,11 +48,9 @@ class GetAnnonceController extends AbstractController
             $candidature->setUserNom($user->getNom());
             $candidature->setUserPrenom($user->getPrénom());
             $candidature->setUserMail($user->getEmail());
-            $candidature->setUserIsValid($user->getIsValid());
             $candidature->setAnnonceTitle($item->getIntitulé());
             $candidature->setAnnonceNomEntreprise($item->getNomEntreprise());
             $candidature->setAnnonceDate($item->getDateCréation());
-            $candidature->setAnnonceIsValid($item->isValidationStatut());
 
             // save l'user à valider dans doctrine et execute le sql pour save l'user dans la db
             $entityManager->persist($candidature);

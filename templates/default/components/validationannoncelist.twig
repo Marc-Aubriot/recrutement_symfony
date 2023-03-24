@@ -10,11 +10,11 @@
             {% for item in annonces %}
                 <div class="row m-1 bg-info rounded">
                     <div class="col-9">
-                        <p><b>{{ item.id|e }} {{ item.recruteurId|e }} {{ item.intitulé|e }} {{ item.nomEntreprise|e }}</b></p>
+                        <p><b>{{ item.recruteurEmail|e }} {{ item.intitulé|e }} {{ item.nomEntreprise|e }}</b></p>
                     </div>
 
                     <div class="col-3">
-                        <a href={{ url('annonce', {'itemid': item.id, 'id':user.id}) }}>Valider l'annonce</a>
+                        <a href={{ url('annonce', {'itemid': item.id}) }}>Valider l'annonce</a>
                     </div>
                 </div>
             {% endfor %}

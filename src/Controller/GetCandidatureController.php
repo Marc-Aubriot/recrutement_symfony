@@ -27,10 +27,10 @@ class GetCandidatureController extends AbstractController
 
         // look dans le répertoire pour matching userId = user false et ordered par date
         $candidatures = $repository->findBy(
-            ['userId' => $user->getId() ],
+            ['userMail' => $user->getEmail() ],
             ['dateCandidature' => 'ASC']
         );
-
+        
         // render la page de listage des validations à faire 
         return $this->render('default/components/getcandidature.twig', [
             'user' => $user,

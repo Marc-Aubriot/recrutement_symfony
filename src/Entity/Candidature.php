@@ -11,13 +11,6 @@ use Symfony\Component\Uid\Uuid;
 #[ORM\Entity(repositoryClass: CandidatureRepository::class)]
 class Candidature
 {
-    /*
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-    */
-
     #[ORM\Id]
     #[ORM\Column(type: UuidType::NAME, unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
@@ -29,11 +22,8 @@ class Candidature
         return $this->id;
     }
 
-    #[ORM\Column]
-    private ?int $annonceId = null;
-
-    #[ORM\Column]
-    private ?int $userId = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $annonceId = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateCandidature = null;
@@ -50,9 +40,6 @@ class Candidature
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $userMail = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $userIsValid = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $annonceTitle = null;
 
@@ -62,36 +49,14 @@ class Candidature
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $annonceDate = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $annonceIsValid = null;
-
-    /*
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-    */
-
-    public function getAnnonceId(): ?int
+    public function getAnnonceId(): ?string
     {
         return $this->annonceId;
     }
 
-    public function setAnnonceId(int $annonceId): self
+    public function setAnnonceId(?string $annonceId): self
     {
         $this->annonceId = $annonceId;
-
-        return $this;
-    }
-
-    public function getUserId(): ?int
-    {
-        return $this->userId;
-    }
-
-    public function setUserId(int $userId): self
-    {
-        $this->userId = $userId;
 
         return $this;
     }
@@ -156,18 +121,6 @@ class Candidature
         return $this;
     }
 
-    public function isUserIsValid(): ?bool
-    {
-        return $this->userIsValid;
-    }
-
-    public function setUserIsValid(?bool $userIsValid): self
-    {
-        $this->userIsValid = $userIsValid;
-
-        return $this;
-    }
-
     public function getAnnonceTitle(): ?string
     {
         return $this->annonceTitle;
@@ -200,18 +153,6 @@ class Candidature
     public function setAnnonceDate(?\DateTimeInterface $annonceDate): self
     {
         $this->annonceDate = $annonceDate;
-
-        return $this;
-    }
-
-    public function isAnnonceIsValid(): ?bool
-    {
-        return $this->annonceIsValid;
-    }
-
-    public function setAnnonceIsValid(?bool $annonceIsValid): self
-    {
-        $this->annonceIsValid = $annonceIsValid;
 
         return $this;
     }

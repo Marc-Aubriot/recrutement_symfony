@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ValidationCandidatureListController extends AbstractController
 {
-    #[Route('backoffice/consultant/validation/candidature/list', name:"validationcandidaturelist")]
+    #[Route('backoffice/consultant/validation/candidature/', name:"validationcandidaturelist")]
     public function backoffice(EntityManagerInterface $entityManager): Response
     {
         // securise le controlleur

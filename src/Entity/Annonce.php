@@ -11,12 +11,6 @@ use Symfony\Component\Uid\Uuid;
 #[ORM\Entity(repositoryClass: AnnonceRepository::class)]
 class Annonce
 {
-    /*
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-    */
     #[ORM\Id]
     #[ORM\Column(type: UuidType::NAME, unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
@@ -28,8 +22,20 @@ class Annonce
         return $this->id;
     }
 
-    #[ORM\Column]
-    private ?int $recruteurId = null;
+    #[ORM\Column(length: 100)]
+    private ?string $recruteurEmail = null;
+
+    public function getRecruteurEmail(): ?string
+    {
+        return $this->recruteurEmail;
+    }
+
+    public function setRecruteurEmail(string $recruteurEmail): self
+    {
+        $this->recruteurEmail = $recruteurEmail;
+
+        return $this;
+    }
 
     #[ORM\Column(length: 255)]
     private ?string $intitulé = null;
@@ -54,26 +60,7 @@ class Annonce
 
     #[ORM\Column]
     private ?bool $validation_statut = null;
-
-    /*
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-    */
     
-    public function getRecruteurId(): ?int
-    {
-        return $this->recruteurId;
-    }
-
-    public function setRecruteurId(int $recruteurId): self
-    {
-        $this->recruteurId = $recruteurId;
-
-        return $this;
-    }
-
     public function getIntitulé(): ?string
     {
         return $this->intitulé;

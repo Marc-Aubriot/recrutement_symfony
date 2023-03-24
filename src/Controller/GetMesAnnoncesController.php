@@ -27,8 +27,8 @@ class GetMesAnnoncesController extends AbstractController
 
         // look dans le répertoire pour matching recruteurId = user et ordered par id
         $annonces = $repository->findBy(
-            ['recruteurId' => $user->getId() ],
-            ['id' => 'ASC']
+            ['recruteurEmail' => $user->getEmail() ],
+            ['dateCréation' => 'ASC']
         );
 
         // render la page de listage des validations à faire 

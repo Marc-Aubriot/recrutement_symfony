@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ValidationCompteListController extends AbstractController
 {
-    #[Route('backoffice/consultant/validation/compte/list', name:"validationcomptelist")]
+    #[Route('backoffice/consultant/validation/compte', name:"validationcomptelist")]
     public function backoffice(EntityManagerInterface $entityManager): Response
     {
         // securise le controlleur
