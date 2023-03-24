@@ -13,16 +13,21 @@ use App\Service\CvUploader;
 
 class CompleteProfilCandidatController extends AbstractController
 {
-    #[Route('/backoffice/candidat{id}/profil', name:"completeprofilcandidat")]
-    public function backofficeCandidat(EntityManagerInterface $entityManager, int $id, Request $request, CvUploader $fileUploader): Response
+    #[Route('/backoffice/candidat/profile', name:"completeprofilcandidat")]
+    public function backofficeCandidat(EntityManagerInterface $entityManager, Request $request, CvUploader $fileUploader): Response
     {
+        // securise le controlleur
+        $this->denyAccessUnlessGranted('ROLE_CANDIDAT', null, "erreur 403 custom : zone restreinte aux candidats.");
+
+        // récupères l'User Entity qui est log in, son mail et enfin l'Utilisateur Entity correspondant
+        $userSecurity = $this->getUser();
+        $userMail = $userSecurity->getUserIdentifier();
+        $user = $entityManager->getRepository(Utilisateur::class)->findOneBy(['email' => $userMail]);
+
         // set les variables de la page
         $form = $this->createForm(CompleteProfilCandidatFormType::class);
         $error_message = null;
         $validation_message = null;
-
-        // fetch l'objet user via son id dans la db
-        $user = $entityManager->getRepository(Utilisateur::class)->find($id);
 
         // Si le formulaire a été Submit
         $form->handleRequest($request);

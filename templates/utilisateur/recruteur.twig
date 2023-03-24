@@ -4,9 +4,9 @@
 {% block sectionPanel %}
     <p>RECRUTEUR PANEL TEST</p>
     <ul class="ms-5">
-        <li><a href={{ url('completeprofilrecruteur', {'id': user.id}) }}>Compléter mon profil</a></li>
-        <li><a href={{ url('addannonce', {'id': user.id}) }}>Créer une nouvelle annonce</a></li>
-        <li><a href={{ url('getmesannonces', {'id': user.id}) }}>Voir mes annonces</a></li>
+        <li><a href={{ url('completeprofilrecruteur') }}>Compléter mon profil</a></li>
+        <li><a href={{ url('addannonce') }}>Créer une nouvelle annonce</a></li>
+        <li><a href={{ url('getmesannonces') }}>Voir mes annonces</a></li>
     </ul>
 {% endblock %}
 

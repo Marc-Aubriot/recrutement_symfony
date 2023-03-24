@@ -14,7 +14,7 @@
                     </div>
 
                     <div class="col-3">
-                        <a href={{ url('voirlescandidats', {'itemid': item.id, 'id':user.id}) }}>Voir les candidats</a>
+                        <a href={{ url('voirlescandidats', {'itemid': item.id}) }}>Voir les candidats</a>
                     </div>
                     
                 </div>
@@ -22,6 +22,7 @@
 
         </div>
         
+        <li class="mb-3"><a href={{ url('backofficeRecruteur') }}>Retour page précèdente</a></li>
     </div>
 
 {% endblock %}

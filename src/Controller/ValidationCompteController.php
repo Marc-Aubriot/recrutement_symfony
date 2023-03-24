@@ -12,14 +12,21 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ValidationCompteController extends AbstractController
 {
-    #[Route('backoffice/consultant{id}/validationcomptelist/comte{itemid}', name:"compte")]
-    public function backoffice(EntityManagerInterface $entityManager, int $id, int $itemid, Request $request): Response
+    #[Route('backoffice/consultant/validation/compte/list/{itemid}', name:"compte")]
+    public function backoffice(EntityManagerInterface $entityManager, $itemid, Request $request): Response
     {
         // initialise les variables
         $validation_message = null;
 
-        // fetch l'objet user (le consultant) via son id dans la db, et fetch l'item (user à valider) de la page dans la db
-        $user = $entityManager->getRepository(Utilisateur::class)->find($id);
+        // securise le controlleur
+        $this->denyAccessUnlessGranted('ROLE_CONSULTANT', null, "erreur 403 custom : zone restreinte aux consultants.");
+
+        // récupères l'User Entity qui est log in, son mail et enfin l'Utilisateur Entity correspondant
+        $userSecurity = $this->getUser();
+        $userMail = $userSecurity->getUserIdentifier();
+        $user = $entityManager->getRepository(Utilisateur::class)->findOneBy(['email' => $userMail]);
+
+        // fetch l'item -> Utilisateur Entity à valider
         $item = $entityManager->getRepository(Utilisateur::class)->find($itemid);
 
         // initialise le formulaire et y attache l'entité item

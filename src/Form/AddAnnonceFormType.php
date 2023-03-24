@@ -33,7 +33,7 @@ class AddAnnonceFormType extends AbstractType
                 'attr' => ['maxlength' => 20],
                 'required' => false,
             ])
-            ->add('submit', SubmitType::class, ['label' => 'Valider les changements'])
+            ->add('submit', SubmitType::class, ['label' => 'Confirmer votre annonce'])
         ;
     }
 

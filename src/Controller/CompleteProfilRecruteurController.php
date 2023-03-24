@@ -13,16 +13,21 @@ use Symfony\Component\HttpFoundation\Request;
 class CompleteProfilRecruteurController extends AbstractController
 {
 
-    #[Route('/backoffice/recruteur{id}/profil', name:"completeprofilrecruteur")]
-    public function backofficeRecruteur(EntityManagerInterface $entityManager, int $id, Request $request): Response
+    #[Route('/backoffice/recruteur/profile', name:"completeprofilrecruteur")]
+    public function backofficeRecruteur(EntityManagerInterface $entityManager, Request $request): Response
     {
+        // securise le controlleur
+        $this->denyAccessUnlessGranted('ROLE_RECRUTEUR', null, "erreur 403 custom : zone restreinte aux recruteurs.");
+
+        // récupères l'User Entity qui est log in, son mail et enfin l'Utilisateur Entity correspondant
+        $userSecurity = $this->getUser();
+        $userMail = $userSecurity->getUserIdentifier();
+        $user = $entityManager->getRepository(Utilisateur::class)->findOneBy(['email' => $userMail]);
+
         // set les variables de la page
         $form = $this->createForm(CompleteProfilRecruteurFormType::class);
         $error_message = null;
         $validation_message = null;
-
-        // fetch l'objet user via son id dans la db
-        $user = $entityManager->getRepository(Utilisateur::class)->find($id);
 
         // Si le formulaire a été Submit
         $form->handleRequest($request);

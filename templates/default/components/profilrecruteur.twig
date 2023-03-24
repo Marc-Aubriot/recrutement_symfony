@@ -1,5 +1,5 @@
 {# templates/default/profilrecruteur.twig #}
-{% extends 'utilisateur/candidat.twig' %}
+{% extends 'utilisateur/recruteur.twig' %}
 
 {% block sectionMain %}
     <div class="completeProfilFormBox row">
@@ -23,5 +23,6 @@
             <p class="p-3"><b>{{validationMessage}}</b><p>
         </div>
 
+        <li class="mb-3"><a href={{ url('backofficeRecruteur') }}>Retour page précèdente</a></li>
     </div>
 {% endblock %}
