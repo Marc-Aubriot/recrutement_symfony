@@ -1,0 +1,19 @@
+{# templates/default/addconsultant.twig #}
+{% extends 'utilisateur/administrateur.twig' %}
+
+{% block sectionMain %}
+    <div class="completeProfilFormBox row">
+        
+        {{ form(form) }}
+
+         <div class="{{ errorMessage=='' ? 'd-none' :'error-display-box' }}">
+            <p class="p-3"><b>{{errorMessage}}</b><p>
+        </div>
+
+        <div class="{{ validationMessage=='' ? 'd-none' :'validate-display-box' }}">
+            <p class="p-3"><b>{{validationMessage}}</b><p>
+        </div>
+
+        <li><a href={{ url('backofficeAdmin') }}>Retour page précèdente</a></li>
+    </div>
+{% endblock %}

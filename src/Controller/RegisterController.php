@@ -4,16 +4,18 @@ namespace App\Controller;
 
 use App\Form\RegisterFormType;
 use App\Entity\Utilisateur;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegisterController extends AbstractController
 {
     #[Route('/register', name:"register")]
-    public function register(Request $request, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
         // set les variables de la page
         $form = $this->createForm(RegisterFormType::class);
@@ -71,17 +73,28 @@ class RegisterController extends AbstractController
 
             // défini le type d'utilisateur
             //if ( $data['checkboxCandidat'] === true ) {
-            $user_type = $data['checkboxCandidat'] ? 1 : 2;
-
-            // les informations fournies sont bonnes donc on créé un nouvel utilisateur
-            $user = new Utilisateur();
-            $user->setEmail($data['email']);
-            $user->setPassword($data['password']);
-            $user->setIsValid(false);
-            $user->setUserType($user_type);
+            $user_type = $data['checkboxCandidat'] ? ['ROLE_CANDIDAT'] : ['ROLE_RECRUTEUR'];
    
+            // les informations fournies sont bonnes donc on créé Utilisateur Entity
+            $newUser = new Utilisateur();
+            $newUser->setEmail($data['email']);
+            $newUser->setIsValid(false);
+
+            // on créé aussi User Entity qui contient les informations de sécurité
+            $newUserSecurity = new User();
+            $newUserSecurity->setEmail($data['email']);
+            $newUserSecurity->setRoles($user_type);
+            // hash le password
+            $plaintextPassword = $data['password'];
+            $hashedPassword = $passwordHasher->hashPassword(
+                $newUserSecurity,
+                $plaintextPassword
+            );
+            $newUserSecurity->setPassword($hashedPassword);
+
             // save l'user dans doctrine et execute le sql pour save l'user dans la db
-            $entityManager->persist($user);
+            $entityManager->persist($newUser);
+            $entityManager->persist($newUserSecurity);
             $entityManager->flush();
 
             // enregistrement réussi, display un message de confirmation

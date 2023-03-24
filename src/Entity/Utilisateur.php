@@ -26,11 +26,11 @@ class Utilisateur
     #[ORM\Column(length: 100)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255)]
+    /*#[ORM\Column(length: 255)]
     private ?string $password = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $userType = null;
+    private ?int $userType = null;*/
 
     #[ORM\Column(nullable: true)]
     private ?bool $isValid = null;
@@ -91,7 +91,7 @@ class Utilisateur
         return $this;
     }
 
-    public function getPassword(): ?string
+    /*public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -101,9 +101,9 @@ class Utilisateur
         $this->password = $password;
 
         return $this;
-    }
+    }*/
 
-    public function getUserType(): ?int
+    /*public function getUserType(): ?int
     {
         return $this->userType;
     }
@@ -113,7 +113,7 @@ class Utilisateur
         $this->userType = $userType;
 
         return $this;
-    }
+    }*/
 
     public function getIsValid(): ?bool
     {

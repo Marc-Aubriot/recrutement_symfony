@@ -1,17 +1,17 @@
 <?php
-// src/Controller/ValidationAnnonceListController.php
+// src/Controller/BackofficeConsultantController.php
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
-use App\Entity\Annonce;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
-class ValidationAnnonceListController extends AbstractController
+class BackofficeConsultantController extends AbstractController
 {
-    #[Route('backoffice/consultant/validation/annonce/list', name:"validationannoncelist")]
+    #[Route('/backoffice/consultant', name:"backofficeConsultant")]
     public function backoffice(EntityManagerInterface $entityManager): Response
     {
         // securise le controlleur
@@ -22,19 +22,8 @@ class ValidationAnnonceListController extends AbstractController
         $userMail = $userSecurity->getUserIdentifier();
         $user = $entityManager->getRepository(Utilisateur::class)->findOneBy(['email' => $userMail]);
 
-        // look dans le répertoire une liste des comptes non validés
-        $repository = $entityManager->getRepository(Annonce::class);
-
-        // look dans le répertoire pour matching validation_statut false et ordered par date
-        $annonces = $repository->findBy(
-            ['validation_statut' => false ],
-            ['dateCréation' => 'ASC']
-        );
-
-        // render la page de listage des validations à faire 
-        return $this->render('default/components/validationannoncelist.twig', [
+        return $this->render('utilisateur/consultant.twig', [
             'user' => $user,
-            'annonces' => $annonces,
         ]);
     }
 }

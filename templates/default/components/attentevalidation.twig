@@ -1,0 +1,14 @@
+{# templates/default/attentevalidation.twig #}
+{% extends 'default/connection.html.twig' %}
+
+{# ... #}
+
+{% block login %}
+
+    <div class="row">
+        <p>Votre compte est en attente de validation par un de nos consultants.</p>
+        <p>Veuillez réessayer ultérieuremment.</p>
+        <li class="mb-3"><a href={{ url('login') }}>Retour page de connexion</a></li>
+    </div>
+            
+{% endblock %}

@@ -4,9 +4,9 @@
 {% block sectionPanel %}
     <p>CONSULTANT PANEL TEST</p>
     <ul class="ms-5">
-        <li><a href={{ url('validationcomptelist', {'id': user.id}) }}>Validation de compte</a></li>
-        <li><a href={{ url('validationannoncelist', {'id': user.id}) }}>Validation des annonces</a></li>
-        <li><a href={{ url('validationcandidaturelist', {'id': user.id}) }}>Validation des candidatures</a></li>
+        <li><a href={{ url('validationcomptelist') }}>Validation de compte</a></li>
+        <li><a href={{ url('validationannoncelist') }}>Validation des annonces</a></li>
+        <li><a href={{ url('validationcandidaturelist') }}>Validation des candidatures</a></li>
     </ul>
 {% endblock %}
 
