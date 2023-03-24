@@ -18,15 +18,22 @@ use Symfony\Component\Mime\Part\File;
 
 class ValidationCandidatureController extends AbstractController
 {
-    #[Route('backoffice/consultant{id}/validationcandidaturelist/candidature{itemid}', name:"validationcandidature")]
-    public function backoffice(EntityManagerInterface $entityManager, int $id, int $itemid, Request $request, MailerInterface $mailer): Response
+    #[Route('backoffice/consultant/validation/candidature/list/{itemid}', name:"validationcandidature")]
+    public function backoffice(EntityManagerInterface $entityManager, int $itemid, Request $request, MailerInterface $mailer): Response
     {
+        // securise le controlleur
+        $this->denyAccessUnlessGranted('ROLE_CONSULTANT', null, "erreur 403 custom : zone restreinte aux consultants.");
+
+        // récupères l'User Entity qui est log in, son mail et enfin l'Utilisateur Entity correspondant
+        $userSecurity = $this->getUser();
+        $userMail = $userSecurity->getUserIdentifier();
+        $user = $entityManager->getRepository(Utilisateur::class)->findOneBy(['email' => $userMail]);
+
         // initialise les variables
         $validation_message = null;
         $mailBot = $this->getParameter('mailBot');
 
-        // fetch l'objet user (le consultant) via son id dans la db, et fetch l'item (user à valider) de la page dans la db
-        $user = $entityManager->getRepository(Utilisateur::class)->find($id);
+        // fetch l'item (user à valider) de la page dans la db
         $item = $entityManager->getRepository(Candidature::class)->find($itemid);
 
         // fetch l'entity du recruteur

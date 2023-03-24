@@ -14,14 +14,21 @@ use Symfony\Component\HttpFoundation\Request;
 
 class GetAnnonceController extends AbstractController
 {
-    #[Route('backoffice/candidat{id}/validationcomptelist/getannonce{itemid}', name:"getannonce")]
-    public function backoffice(EntityManagerInterface $entityManager, int $id, int $itemid, Request $request): Response
+    #[Route('backoffice/candidat/validation/compte/list/{itemid}', name:"getannonce")]
+    public function backoffice(EntityManagerInterface $entityManager, int $itemid, Request $request): Response
     {
+        // securise le controlleur
+        $this->denyAccessUnlessGranted('ROLE_CANDIDAT', null, "erreur 403 custom : zone restreinte aux candidats.");
+
+        // récupères l'User Entity qui est log in, son mail et enfin l'Utilisateur Entity correspondant
+        $userSecurity = $this->getUser();
+        $userMail = $userSecurity->getUserIdentifier();
+        $user = $entityManager->getRepository(Utilisateur::class)->findOneBy(['email' => $userMail]);
+
         // initialise les variables
         $validation_message = null;
 
         // fetch l'objet user (le candidat) via son id dans la db, et fetch l'item (annonce à visionner) de la page dans la db
-        $user = $entityManager->getRepository(Utilisateur::class)->find($id);
         $item = $entityManager->getRepository(Annonce::class)->find($itemid);
 
         // initialise le formulaire de candidature

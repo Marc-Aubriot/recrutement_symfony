@@ -13,14 +13,21 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ValidationAnnonceController extends AbstractController
 {
-    #[Route('backoffice/consultant{id}/validationcomptelist/annonce{itemid}', name:"annonce")]
-    public function backoffice(EntityManagerInterface $entityManager, int $id, int $itemid, Request $request): Response
+    #[Route('backoffice/consultant/validation/annonce/{itemid}', name:"annonce")]
+    public function backoffice(EntityManagerInterface $entityManager, int $itemid, Request $request): Response
     {
+        // securise le controlleur
+        $this->denyAccessUnlessGranted('ROLE_CONSULTANT', null, "erreur 403 custom : zone restreinte aux consultants.");
+
+        // récupères l'User Entity qui est log in, son mail et enfin l'Utilisateur Entity correspondant
+        $userSecurity = $this->getUser();
+        $userMail = $userSecurity->getUserIdentifier();
+        $user = $entityManager->getRepository(Utilisateur::class)->findOneBy(['email' => $userMail]);
+
         // initialise les variables
         $validation_message = null;
 
-        // fetch l'objet user (le consultant) via son id dans la db, et fetch l'item (annonce à valider) de la page dans la db
-        $user = $entityManager->getRepository(Utilisateur::class)->find($id);
+        // fetch l'item (annonce à valider) de la page dans la db
         $item = $entityManager->getRepository(Annonce::class)->find($itemid);
 
         // initialise le formulaire et y attache l'entité item
